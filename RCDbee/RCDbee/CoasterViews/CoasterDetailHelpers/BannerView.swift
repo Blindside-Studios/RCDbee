@@ -2,7 +2,7 @@
 //  BannerView.swift
 //  RCDbee
 //
-//  Created by Nicolas Helbig on 21.10.24.
+//  Created by Blindside on 21.10.24.
 //
 
 import SwiftUI

@@ -19,7 +19,7 @@ struct CoasterDetailView: View {
             VStack{
                 HStack{
                     Text("\(coaster.name)")
-                        .font(.system(size: 60))
+                        .font(.system(size: 54))
                         .fontWeight(.heavy)
                         .multilineTextAlignment(.leading)
                     Spacer()
