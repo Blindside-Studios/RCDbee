@@ -11,8 +11,10 @@ struct CoasterDetailView: View {
     @Binding var coaster: RCDBCoasterDetail!
     
     var body: some View {
-        Text("\(coaster.id)")
-        Text(coaster.name)
+        VStack{
+            Text("\(coaster.id)")
+            Text(coaster.name)
+        }
     }
 }
 
