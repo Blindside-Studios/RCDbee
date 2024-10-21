@@ -45,7 +45,6 @@ struct ContentView: View {
                     Text("Alpengeist (id:277)")
                 }
         }
-        .padding()
     }
 }
 

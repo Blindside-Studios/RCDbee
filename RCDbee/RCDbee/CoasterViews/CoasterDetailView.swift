@@ -12,25 +12,37 @@ struct CoasterDetailView: View {
     
     var body: some View {
         VStack{
-            if ((coaster.mainPicture!.url) != nil){
-                GeometryReader { geometry in
-                            AsyncImage(url: URL(string: coaster.mainPicture!.url!)) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: geometry.size.width, height: 400)
-                                    .clipped()
-                                    .clipShape(RoundedRectangle(cornerRadius: 15))
-                            } placeholder: {
-                                ProgressView()
-                            }
-                        }
-                        .frame(height: 400)
+            // image at the top
+            BannerView(pictureURL: .constant(coaster.mainPicture?.url))
+            
+            // fact card
+            VStack{
+                HStack{
+                    Text("\(coaster.name)")
+                        .font(.system(size: 60))
+                        .fontWeight(.heavy)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                Spacer()
+                    .frame(height: 20)
+                HStack{
+                    Text(coaster.make ?? "Unknown Manufacturer")
+                    Spacer()
+                }
+                HStack{
+                    Text(coaster.type ?? "Unknown Type")
+                    Divider()
+                    Text(coaster.design ?? "Unknown Design")
+                    Spacer()
+                }
+                .frame(height:30)
             }
-            else { Image(systemName: "xmark.bin") }
-            Text("\(coaster.id)")
-            Text(coaster.name)
+            .offset(y: -95)
+            .padding()
+            Spacer()
         }
+        .ignoresSafeArea()
     }
 }
 

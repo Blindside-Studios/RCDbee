@@ -11,6 +11,9 @@ struct RCDBCoasterDetail: Codable {
     let id: Int
     let name: String
     let park: Park
+    let make: String?
+    let type: String?
+    let design: String?
     let city, state, country, region: String?
     let link: String?
     let status: Status?
