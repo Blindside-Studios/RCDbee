@@ -12,6 +12,22 @@ struct CoasterDetailView: View {
     
     var body: some View {
         VStack{
+            if ((coaster.mainPicture!.url) != nil){
+                GeometryReader { geometry in
+                            AsyncImage(url: URL(string: coaster.mainPicture!.url!)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: geometry.size.width, height: 400)
+                                    .clipped()
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                            } placeholder: {
+                                ProgressView()
+                            }
+                        }
+                        .frame(height: 400)
+            }
+            else { Image(systemName: "xmark.bin") }
             Text("\(coaster.id)")
             Text(coaster.name)
         }
