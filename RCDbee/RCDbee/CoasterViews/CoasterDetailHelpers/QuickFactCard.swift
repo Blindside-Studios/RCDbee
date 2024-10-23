@@ -2,7 +2,7 @@
 //  QuickFactCard.swift
 //  RCDbee
 //
-//  Created by Nicolas Helbig on 23.10.24.
+//  Created by Blindside on 23.10.24.
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct QuickFactCard: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .background(.ultraThinMaterial)
+                .background(.regularMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
             VStack{
                 HStack{
