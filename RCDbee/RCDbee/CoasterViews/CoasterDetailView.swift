@@ -36,7 +36,7 @@ struct CoasterDetailView: View {
                     ScrollView(.horizontal){
                         LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
                             ForEach(coaster.statItems, id: \.statName) { item in
-                                QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue!))
+                                QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue ?? "No Data"))
                                     .frame(width: 138, height: 140)
                             }
                         }

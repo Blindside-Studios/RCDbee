@@ -21,6 +21,7 @@ struct BannerView: View {
                         .clipped()
                 } placeholder: {
                     ProgressView()
+                        .frame(height: 400)
                 }
             }
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
@@ -28,7 +29,14 @@ struct BannerView: View {
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
             .frame(height: 400)
         }
-        else { Image(systemName: "xmark.bin") }
+        else { Image(systemName: "xmark.bin")
+            .resizable()
+            .frame(height: 400)
+            .opacity(0.3)
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+            .frame(height: 400)}
     }
 }
 
