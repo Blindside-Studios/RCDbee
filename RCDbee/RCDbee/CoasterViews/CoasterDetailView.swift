@@ -10,37 +10,45 @@ import SwiftUI
 struct CoasterDetailView: View {
     @Binding var coaster: RCDBCoasterDetail!
     
+    var adaptiveFactColumns: [GridItem] {
+            [GridItem(.adaptive(minimum: 120, maximum: 200))]
+        }
+    
     var body: some View {
-        VStack{
-            // image at the top
-            BannerView(pictureURL: .constant(coaster.mainPicture?.url))
-            
-            // fact card
-            VStack{
-                HStack{
-                    Text("\(coaster.name)")
-                        .font(.system(size: 54))
-                        .fontWeight(.heavy)
-                        .multilineTextAlignment(.leading)
+        ZStack{
+            Rectangle().fill(.blue).opacity(0.4)
+            ScrollView{
+                // image at the top
+                BannerView(pictureURL: .constant(coaster.mainPicture?.url))
+                
+                // fact card
+                VStack{
+                    HStack{
+                        Text("\(coaster.name)")
+                            .font(.system(size: 54))
+                            .fontWeight(.heavy)
+                            .multilineTextAlignment(.leading)
+                        Spacer()
+                    }
+                    .padding()
                     Spacer()
+                        .frame(height: 10)
+                    ScrollView(.horizontal){
+                        LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
+                            ForEach(coaster.statItems, id: \.statName) { item in
+                                QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue!))
+                                    .frame(width: 138, height: 140)
+                            }
+                        }
+                        .padding()
+                    }
+                    .offset(y: -35)
+                    .frame(height: 320)
                 }
+                .offset(y: -95)
+                //.padding()
                 Spacer()
-                    .frame(height: 20)
-                HStack{
-                    Text(coaster.make ?? "Unknown Manufacturer")
-                    Spacer()
-                }
-                HStack{
-                    Text(coaster.type ?? "Unknown Type")
-                    Divider()
-                    Text(coaster.design ?? "Unknown Design")
-                    Spacer()
-                }
-                .frame(height:30)
             }
-            .offset(y: -95)
-            .padding()
-            Spacer()
         }
         .ignoresSafeArea()
     }
