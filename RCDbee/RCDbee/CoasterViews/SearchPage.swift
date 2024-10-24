@@ -26,15 +26,19 @@ struct SearchPage: View {
             Text(confirmationDialogue)
             
             if let coasterResults = viewModel.coasters{
-                List(coasterResults.coasters) { coaster in
-                    Text(coaster.name)
-                        .onTapGesture {
-                            selectedCoaster = coaster
-                            presentSheet = true
-                        }
-                }
-                .sheet(isPresented: $presentSheet) {
-                  CoasterDetailView(coaster: $selectedCoaster)
+                ScrollView {
+                    ForEach (coasterResults.coasters, id: \.id) { coaster in
+                        SearchResultRow(coaster: .constant(coaster))
+                            .frame(height: 150)
+                            .padding(.horizontal)
+                            .onTapGesture {
+                                selectedCoaster = coaster
+                                presentSheet = true
+                            }
+                    }
+                    .sheet(isPresented: $presentSheet) {
+                        CoasterDetailView(coaster: $selectedCoaster)
+                    }
                 }
             }
         }
