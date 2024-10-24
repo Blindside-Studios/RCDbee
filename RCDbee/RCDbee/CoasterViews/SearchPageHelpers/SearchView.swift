@@ -17,6 +17,7 @@ struct SearchView: View {
                 .padding(.horizontal, 25)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
+                .keyboardType(.webSearch)
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")

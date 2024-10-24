@@ -56,7 +56,7 @@ struct ContentView: View {
                     Image(systemName: "star.fill")
                     Text("Alpengeist (id:277)")
                 }
-            SearchView(text: .constant(""))
+            SearchPage()
                 .tabItem{
                     Image(systemName: "magnifyingglass")
                     Text("Search")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RCDBCoasterDetail: Codable {
+struct RCDBCoasterDetail: Codable, Identifiable {
     let id: Int
     let name: String
     let park: Park

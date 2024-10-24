@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class RandomCoasterViewModel: ObservableObject {
     @Published var coaster: RCDBCoasterDetail?
@@ -21,7 +20,6 @@ class RandomCoasterViewModel: ObservableObject {
                     let coaster = try decoder.decode(RCDBCoasterDetail.self, from: data)
                     DispatchQueue.main.async {
                         self.coaster = coaster
-                        debugPrint(coaster)
                     }
                 } catch {
                     print("Error decoding JSON: \(error)")
