@@ -14,7 +14,7 @@ struct CoasterDetailView: View {
     
     var body: some View {
         ZStack{
-            Rectangle().fill(.blue).opacity(0.4)
+            //Rectangle().fill(.blue).opacity(0.4)
             ScrollView{
                 Group {
                     if horizontalSizeClass == .compact {
@@ -38,7 +38,7 @@ struct CoasterDetailView: View {
                             VStack{
                                 Spacer()
                                     .frame(height: 50)
-                                DetailsHeaderView(coaster: .constant(coaster), spacing: .constant(300))
+                                DetailsHeaderView(coaster: .constant(coaster), spacing: .constant(220))
                             }
                         }
                     }
@@ -53,7 +53,7 @@ struct CoasterDetailView: View {
 
 #Preview {
     @Previewable @State var sampleCoaster: RCDBCoasterDetail? = {
-            guard let url = Bundle.main.url(forResource: "Taron", withExtension: "json"),
+            guard let url = Bundle.main.url(forResource: "Alpengeist", withExtension: "json"),
                   let data = try? Data(contentsOf: url),
                   let coaster = try? JSONDecoder().decode(RCDBCoasterDetail.self, from: data) else {
                 return nil

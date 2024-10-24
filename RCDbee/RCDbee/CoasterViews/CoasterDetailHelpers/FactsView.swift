@@ -10,22 +10,36 @@ import SwiftUI
 struct FactsView: View {
     @Binding var coaster: RCDBCoasterDetail
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
     var adaptiveFactColumns: [GridItem] {
-            [GridItem(.adaptive(minimum: 120, maximum: 200))]
-        }
+        [GridItem(.adaptive(minimum: 120, maximum: 300))]
+    }
     
     var body: some View {
         ScrollView(.horizontal){
-            LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
-                ForEach(coaster.statItems, id: \.statName) { item in
-                    QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue ?? "No Data"))
-                        .frame(width: 138, height: 140)
+            if (horizontalSizeClass == .compact){
+                LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
+                    ForEach(coaster.statItems, id: \.statName) { item in
+                        QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue ?? "No Data"))
+                            .frame(width: 138, height: 140)
+                    }
                 }
+                .offset(y: -35)
+                .frame(height: 290)
+                .padding()
+            } else {
+                LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
+                    ForEach(coaster.statItems, id: \.statName) { item in
+                        QuickFactCard(factIcon: .constant(Image(systemName: item.statIcon)), factHeader: .constant(item.statName), factContent: .constant(item.statValue ?? "No Data"))
+                            .frame(width: 200, height: 120)
+                    }
+                }
+                .padding()
+                .frame(height:282)
             }
-            .padding()
         }
-        .offset(y: -35)
-        .frame(height: 320)
+        
     }
 }
 

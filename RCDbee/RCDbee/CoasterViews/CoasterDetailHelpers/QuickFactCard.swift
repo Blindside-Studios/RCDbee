@@ -15,7 +15,7 @@ struct QuickFactCard: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .background(.regularMaterial)
+                .background(.thinMaterial)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
             VStack{
                 HStack{
