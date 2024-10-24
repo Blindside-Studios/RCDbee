@@ -17,26 +17,25 @@ struct BannerView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: geometry.size.width, height: 400)
+                        .frame(width: geometry.size.width)
                         .clipped()
                 } placeholder: {
                     ProgressView()
-                        .frame(height: 400)
+                        //.frame(height: 400)
                 }
             }
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
             .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
-            .frame(height: 400)
         }
         else { Image(systemName: "xmark.bin")
-            .resizable()
-            .frame(height: 400)
-            .opacity(0.3)
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
-            .frame(height: 400)}
+                .resizable()
+                .opacity(0.3)
+                .aspectRatio(contentMode: .fill)
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .center, endPoint: .bottom))
+        }
     }
 }
 
