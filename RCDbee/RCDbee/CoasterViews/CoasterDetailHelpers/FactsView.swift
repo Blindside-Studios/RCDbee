@@ -25,7 +25,6 @@ struct FactsView: View {
                             .frame(width: 138, height: 140)
                     }
                 }
-                .offset(y: -35)
                 .frame(height: 290)
                 .padding()
             } else {
