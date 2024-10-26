@@ -16,7 +16,7 @@ struct QuickFactCard: View {
         ZStack{
             Rectangle()
                 .background(.thinMaterial)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
             VStack{
                 HStack{
                     //factIcon

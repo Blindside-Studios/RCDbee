@@ -26,6 +26,7 @@ struct FactsView: View {
                     }
                 }
                 .frame(height: 290)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
                 .padding()
             } else {
                 LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
@@ -34,8 +35,9 @@ struct FactsView: View {
                             .frame(width: 200, height: 120)
                     }
                 }
-                .padding()
                 .frame(height:282)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .padding()
             }
         }
         

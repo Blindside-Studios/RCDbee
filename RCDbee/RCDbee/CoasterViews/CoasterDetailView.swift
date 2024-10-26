@@ -14,7 +14,10 @@ struct CoasterDetailView: View {
     
     var body: some View {
         ZStack{
-            //Rectangle().fill(.blue).opacity(0.4)
+            LinearGradient(gradient: Gradient(colors: [.cyan, .blue, .purple]), startPoint: .top, endPoint: .bottom)
+                .contrast(5)
+                .opacity(0.3)
+            
             ScrollView{
                 Group {
                     if horizontalSizeClass == .compact {

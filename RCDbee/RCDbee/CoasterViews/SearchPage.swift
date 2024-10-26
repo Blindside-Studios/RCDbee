@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchPage: View {
     @State var searchText: String = ""
     @StateObject private var viewModel = SearchRCDBViewModel()
-    @State private var confirmationDialogue: String = "Didn't load anything yet"
     @State private var selectedCoaster: RCDBCoasterDetail?
     @State private var presentSheet: Bool = false
     
@@ -22,13 +21,13 @@ struct SearchPage: View {
             SearchView(text: $searchText, confirmedSearch: $receivedSearchConfirmation)
                 .onChange(of: receivedSearchConfirmation, {
                     viewModel.fetchCoasterByTerm(searchTerm: searchText)
-                    confirmationDialogue = "Searched for \(searchText)"
                 })
-            Text("Results: \(viewModel.coasters?.totalMatch ?? 0)")
-            Text(confirmationDialogue)
+                .padding(.vertical)
             
             if let coasterResults = viewModel.coasters{
                 ScrollView {
+                    Spacer()
+                        .frame(height: 50)
                     ForEach (coasterResults.coasters, id: \.id) { coaster in
                         SearchResultRow(coaster: .constant(coaster))
                             .frame(height: 150)
@@ -41,8 +40,13 @@ struct SearchPage: View {
                     .sheet(isPresented: $presentSheet) {
                         CoasterDetailView(coaster: $selectedCoaster)
                     }
+                    Spacer()
+                        .frame(height: 100)
                 }
+                .padding(.vertical, -50)
+                .offset(y: 25)
             }
+            Spacer()
         }
         .onAppear(){
             viewModel.fetchCoasterByTerm(searchTerm: "")
