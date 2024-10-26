@@ -24,23 +24,17 @@ struct RCDBCoasterDetail: Codable, Identifiable {
     let coords: Coords?
     
     var statItems: [StatItem] {
-        var _parkItem = StatItem(statIcon: "star", statName: "Park", statValue: park.name)
-        if let country = country {
-            _parkItem = StatItem(statIcon: "star", statName: "Park", statValue: "\(park.name), \(country)")
-        }
-        
-            return [
-                _parkItem,
-                StatItem(statIcon: "star", statName: "Manufacturer", statValue: make),
-                StatItem(statIcon: "star", statName: "Model", statValue: model),
-                StatItem(statIcon: "star", statName: "Type", statValue: "\(type ?? "Unknown Type"), \(design ?? "Unknown Design")"),
-                StatItem(statIcon: "star", statName: "Speed", statValue: stats?.speed),
-                StatItem(statIcon: "star", statName: "Inversions", statValue: stats?.inversions),
-                StatItem(statIcon: "star", statName: "Length", statValue: stats?.length),
-                StatItem(statIcon: "star", statName: "Height", statValue: stats?.height),
-                // Add more items as needed
-            ]
-        }
+        return [
+            StatItem(statIcon: "star", statName: "Manufacturer", statValue: make),
+            StatItem(statIcon: "star", statName: "Model", statValue: model),
+            StatItem(statIcon: "star", statName: "Type", statValue: "\(type ?? "Unknown Type"), \(design ?? "Unknown Design")"),
+            StatItem(statIcon: "star", statName: "Speed", statValue: stats?.speed),
+            StatItem(statIcon: "star", statName: "Inversions", statValue: stats?.inversions),
+            StatItem(statIcon: "star", statName: "Length", statValue: stats?.length),
+            StatItem(statIcon: "star", statName: "Height", statValue: stats?.height),
+            // Add more items as needed
+        ]
+    }
 }
 
 struct Park: Codable {

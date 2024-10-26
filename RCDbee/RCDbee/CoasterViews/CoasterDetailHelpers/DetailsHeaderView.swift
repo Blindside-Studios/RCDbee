@@ -13,24 +13,37 @@ struct DetailsHeaderView: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Text("\(coaster.name)")
-                    .font(.system(size: 54))
-                    .fontWeight(.heavy)
-                    .multilineTextAlignment(.leading)
-                    .background(){
-                        if (spacing > 50){
-                            // If spacing is set to something larger than 50, we will assume the text is overlayed on the image and thus add a background to it for contast. The default spacing value for iPhone is 10, for iPad, it's several 100s.
-                            Rectangle()
-                                .fill(.thickMaterial)
-                                .blur(radius: 20)
-                                .opacity(0.8)
-                                .padding(-35)
-                        }
-                    }
-                Spacer()
+            Group{
+                HStack{
+                    Text("\(coaster.name)")
+                        .font(.system(size: 54))
+                        .fontWeight(.heavy)
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                .padding()
+                HStack{
+                    Text("\(coaster.park.name), \(coaster.country ?? "Unknown Country")")
+                        .font(.title3)
+                        .opacity(0.75)
+                    Spacer()
+                }
+                .padding()
+                .padding(.vertical, -35)
             }
-            .padding()
+            .background(){
+                if (spacing > 50){
+                    // If spacing is set to something larger than 50, we will assume the text is overlayed on the image and thus add a background to it for contast. The default spacing value for iPhone is 10, for iPad, it's several 100s.
+                    Rectangle()
+                        .fill(.thickMaterial)
+                        .blur(radius: 20)
+                        .opacity(0.8)
+                        .padding(-35)
+                }
+            }
+            .offset(y: -15)
+            
+            
             Spacer()
                 .frame(height: spacing)
             FactsView(coaster: .constant(coaster))
