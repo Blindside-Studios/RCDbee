@@ -2,7 +2,7 @@
 //  SearchPage.swift
 //  RCDbee
 //
-//  Created by Nicolas Helbig on 24.10.24.
+//  Created by Blindside on 24.10.24.
 //
 
 import SwiftUI
@@ -14,11 +14,13 @@ struct SearchPage: View {
     @State private var selectedCoaster: RCDBCoasterDetail?
     @State private var presentSheet: Bool = false
     
+    @State private var receivedSearchConfirmation: Bool = false
+    
     var body: some View {
         VStack{
             
-            SearchView(text: $searchText)
-                .onChange(of: searchText, {
+            SearchView(text: $searchText, confirmedSearch: $receivedSearchConfirmation)
+                .onChange(of: receivedSearchConfirmation, {
                     viewModel.fetchCoasterByTerm(searchTerm: searchText)
                     confirmationDialogue = "Searched for \(searchText)"
                 })

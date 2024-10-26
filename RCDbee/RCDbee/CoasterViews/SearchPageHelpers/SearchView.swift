@@ -2,13 +2,14 @@
 //  SearchView.swift
 //  RCDbee
 //
-//  Created by Nicolas Helbig on 23.10.24.
+//  Created by Blindside on 23.10.24.
 //
 
 import SwiftUI
 
 struct SearchView: View {
     @Binding var text: String
+    @Binding var confirmedSearch: Bool
     
     var body: some View {
         HStack {
@@ -18,6 +19,10 @@ struct SearchView: View {
                 .background(Color(.systemGray6))
                 .cornerRadius(8)
                 .keyboardType(.webSearch)
+                .onSubmit {
+                    confirmedSearch.toggle()
+                }
+                .autocorrectionDisabled()
                 .overlay(
                     HStack {
                         Image(systemName: "magnifyingglass")
@@ -42,5 +47,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(text: .constant(""))
+    SearchView(text: .constant(""), confirmedSearch: .constant(false))
 }
