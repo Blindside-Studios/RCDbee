@@ -15,42 +15,50 @@ struct SearchPage: View {
     
     @State private var receivedSearchConfirmation: Bool = false
     
+    @Namespace private var animationNamespace
+    
     var body: some View {
-        VStack{
-            
-            SearchView(text: $searchText, confirmedSearch: $receivedSearchConfirmation)
-                .onChange(of: receivedSearchConfirmation, {
-                    viewModel.fetchCoasterByTerm(searchTerm: searchText)
-                })
-                .padding(.vertical)
-            
-            if let coasterResults = viewModel.coasters{
-                ScrollView {
-                    Spacer()
-                        .frame(height: 50)
-                    ForEach (coasterResults.coasters, id: \.id) { coaster in
-                        SearchResultRow(coaster: .constant(coaster))
-                            .frame(height: 150)
-                            .padding(.horizontal)
-                            .onTapGesture {
-                                selectedCoaster = coaster
-                                presentSheet = true
+        NavigationStack{
+            VStack{
+                
+                SearchView(text: $searchText, confirmedSearch: $receivedSearchConfirmation)
+                    .onChange(of: receivedSearchConfirmation, {
+                        viewModel.fetchCoasterByTerm(searchTerm: searchText)
+                    })
+                    .padding(.vertical)
+                
+                if let coasterResults = viewModel.coasters{
+                    ScrollView {
+                        Spacer()
+                            .frame(height: 20)
+                        ForEach (coasterResults.coasters, id: \.id) { coaster in
+                            NavigationLink {
+                                CoasterDetailView(coaster: .constant(coaster))
+                                    .navigationTransition(.zoom(sourceID: coaster.id, in: animationNamespace))
+                            } label: {
+                                SearchResultRow(coaster: .constant(coaster))
+                                    .matchedTransitionSource(id: coaster.id, in: animationNamespace)
+                                    .frame(height: 150)
+                                    .padding(.horizontal)
                             }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .sheet(isPresented: $presentSheet) {
+                            CoasterDetailView(coaster: $selectedCoaster)
+                        }
+                        Spacer()
+                            .frame(height: 75)
                     }
-                    .sheet(isPresented: $presentSheet) {
-                        CoasterDetailView(coaster: $selectedCoaster)
-                    }
-                    Spacer()
-                        .frame(height: 100)
+                    .padding(.vertical, -50)
+                    .offset(y: 25)
                 }
-                .padding(.vertical, -50)
-                .offset(y: 25)
+                Spacer()
             }
-            Spacer()
         }
         .onAppear(){
             viewModel.fetchCoasterByTerm(searchTerm: "")
         }
+        .navigationTitle("Search")
     }
 }
 

@@ -10,6 +10,7 @@ import SwiftUI
 struct DetailsHeaderView: View {
     @Binding var coaster: RCDBCoasterDetail
     @Binding var spacing: CGFloat
+    @Namespace var animationNamespace
     
     var body: some View {
         VStack{
@@ -21,6 +22,7 @@ struct DetailsHeaderView: View {
                         .multilineTextAlignment(.leading)
                         .lineLimit(2)
                         .minimumScaleFactor(0.5)
+                        .matchedGeometryEffect(id: "name-\(coaster.id)", in: animationNamespace)
                     Spacer()
                 }
                 .padding()
@@ -30,6 +32,7 @@ struct DetailsHeaderView: View {
                         .opacity(0.75)
                         .lineLimit(1)
                         .minimumScaleFactor(1)
+                        .matchedGeometryEffect(id: "details-\(coaster.id)", in: animationNamespace)
                     Spacer()
                 }
                 .padding()

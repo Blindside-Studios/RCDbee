@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchResultRow: View {
     @Binding var coaster: RCDBCoasterDetail?
+    @Namespace var animationNamespace
     
     var body: some View {
         HStack{
@@ -16,7 +17,10 @@ struct SearchResultRow: View {
                 HStack{
                     Text(coaster?.name ?? "No name provided")
                         .font(.title)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
                         .multilineTextAlignment(.leading)
+                        .matchedGeometryEffect(id: "name-\(coaster!.id)", in: animationNamespace)
                     Spacer()
                 }
                 Spacer()
@@ -25,6 +29,9 @@ struct SearchResultRow: View {
                     Text("\(coaster?.park.name ?? "Park N/A"), \(coaster?.make ?? "Manufacturer N/A"), \(coaster?.country ?? "Country N/A")")
                         .multilineTextAlignment(.leading)
                         .opacity(0.7)
+                        .lineLimit(3)
+                        .minimumScaleFactor(1)
+                        .matchedGeometryEffect(id: "details-\(coaster!.id)", in: animationNamespace)
                     Spacer()
                 }
             }
@@ -33,31 +40,31 @@ struct SearchResultRow: View {
             .padding(.leading, -80)
             .offset(x: 100)
             Spacer()
-            if ((coaster?.mainPicture?.url) != nil){
-                let pictureURL = coaster?.mainPicture?.url
-                GeometryReader { geometry in
-                    AsyncImage(url: URL(string: pictureURL!)) { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: geometry.size.width)
-                            .clipped()
-                    } placeholder: {
-                        ProgressView()
+            Group{
+                if ((coaster?.mainPicture?.url) != nil){
+                    let pictureURL = coaster?.mainPicture?.url
+                    GeometryReader { geometry in
+                        AsyncImage(url: URL(string: pictureURL!)) { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width)
+                                .clipped()
+                        } placeholder: {
+                            ProgressView()
+                        }
                     }
                 }
-                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+                else { Image(systemName: "xmark.bin")
+                        .resizable()
+                        .opacity(0.3)
+                        .aspectRatio(contentMode: .fill)
+                }
             }
-            else { Image(systemName: "xmark.bin")
-                    .resizable()
-                    .opacity(0.3)
-                    .aspectRatio(contentMode: .fill)
-                    .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-                    .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-                    .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-            }
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+            .matchedGeometryEffect(id: "image-\(coaster!.id)", in: animationNamespace)
         }
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 30))
