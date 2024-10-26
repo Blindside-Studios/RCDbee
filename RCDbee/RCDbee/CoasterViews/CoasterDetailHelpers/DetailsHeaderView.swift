@@ -19,6 +19,8 @@ struct DetailsHeaderView: View {
                         .font(.system(size: 54))
                         .fontWeight(.heavy)
                         .multilineTextAlignment(.leading)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.5)
                     Spacer()
                 }
                 .padding()
@@ -26,6 +28,8 @@ struct DetailsHeaderView: View {
                     Text("\(coaster.park.name), \(coaster.country ?? "Unknown Country")")
                         .font(.title3)
                         .opacity(0.75)
+                        .lineLimit(1)
+                        .minimumScaleFactor(1)
                     Spacer()
                 }
                 .padding()

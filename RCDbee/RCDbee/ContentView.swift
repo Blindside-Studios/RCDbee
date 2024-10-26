@@ -54,7 +54,7 @@ struct ContentView: View {
             CoasterDetailView(coaster: .constant(velocicoaster))
                 .tabItem {
                     Image(systemName: "star.fill")
-                    Text("Alpengeist (id:277)")
+                    Text("VelociCoaster (id:6992)")
                 }
             SearchPage()
                 .tabItem{
