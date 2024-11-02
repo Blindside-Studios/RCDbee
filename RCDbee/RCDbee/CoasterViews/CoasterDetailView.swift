@@ -11,7 +11,6 @@ struct CoasterDetailView: View {
     @Binding var coaster: RCDBCoasterDetail!
     
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Namespace var animationNamespace
     
     var body: some View {
         ZStack{
@@ -26,7 +25,6 @@ struct CoasterDetailView: View {
                         // image at the top
                         BannerView(pictureURL: .constant(coaster.mainPicture?.url), pictureID: .constant("\(String(describing: coaster.mainPicture!.id))"))
                             .frame(height: 400)
-                            .matchedGeometryEffect(id: "image-\(coaster.id)", in: animationNamespace)
                         // fact cards
                         DetailsHeaderView(coaster: .constant(coaster), spacing: .constant(10))
                             .offset(y: -95)
@@ -37,7 +35,6 @@ struct CoasterDetailView: View {
                             VStack{
                                 BannerView(pictureURL: .constant(coaster.mainPicture?.url), pictureID: .constant("\(coaster.mainPicture!.id)"))
                                     .frame(height: 600)
-                                    .matchedGeometryEffect(id: "image-\(coaster.id)", in: animationNamespace)
                                 Spacer()
                             }
                             // fact cards

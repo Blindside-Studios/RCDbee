@@ -8,36 +8,17 @@
 import SwiftUI
 
 struct SearchPage: View {
-    @State var searchText: String = ""
+    @State private var searchText: String = ""
     @StateObject private var viewModel = SearchRCDBViewModel()
-    
-    @State private var receivedSearchConfirmation: Bool = false
-    
     @Namespace private var animationNamespace
     
     var body: some View {
-        NavigationStack{
-            VStack{
-                
-                SearchView(text: $searchText, confirmedSearch: $receivedSearchConfirmation)
-                    .onChange(of: receivedSearchConfirmation, {
-                        viewModel.fetchCoasterByTerm(searchTerm: searchText)
-                    })
-                    .padding(.vertical)
-                
-                Button("Clear Cache") {
-                                ImageCache.shared.clearCache()
-                            }
-                            .padding()
-                            .background(Color.red)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                
-                if let coasterResults = viewModel.coasters{
+        NavigationStack {
+            VStack {
+                if let coasterResults = viewModel.coasters {
                     ScrollView {
-                        Spacer()
-                            .frame(height: 20)
-                        ForEach (coasterResults.coasters, id: \.id) { coaster in
+                        Spacer().frame(height: 50)
+                        ForEach(coasterResults.coasters, id: \.id) { coaster in
                             NavigationLink {
                                 CoasterDetailView(coaster: .constant(coaster))
                                     .navigationTransition(.zoom(sourceID: coaster.id, in: animationNamespace))
@@ -49,19 +30,19 @@ struct SearchPage: View {
                             }
                             .buttonStyle(PlainButtonStyle())
                         }
-                        Spacer()
-                            .frame(height: 75)
+                        Spacer().frame(height: 75)
                     }
                     .padding(.vertical, -50)
                     .offset(y: 25)
                 }
                 Spacer()
             }
+            .searchable(text: $searchText, prompt: "Search coasters, parks, etc.")
+            .onSubmit(of: .search) {
+                viewModel.fetchCoasterByTerm(searchTerm: searchText)
+            }
+            .navigationTitle("Search")
         }
-        .onAppear(){
-            viewModel.fetchCoasterByTerm(searchTerm: "")
-        }
-        .navigationTitle("Search")
     }
 }
 
