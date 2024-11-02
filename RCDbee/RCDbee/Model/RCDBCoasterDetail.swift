@@ -60,7 +60,7 @@ struct CoasterStats: Codable {
 }
 
 struct CoasterImage: Codable {
-    let id: Int?
+    let id: Int
     let name: String?
     let url: String?
     let copyName: String?

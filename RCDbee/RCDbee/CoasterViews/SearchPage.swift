@@ -10,8 +10,6 @@ import SwiftUI
 struct SearchPage: View {
     @State var searchText: String = ""
     @StateObject private var viewModel = SearchRCDBViewModel()
-    @State private var selectedCoaster: RCDBCoasterDetail?
-    @State private var presentSheet: Bool = false
     
     @State private var receivedSearchConfirmation: Bool = false
     
@@ -26,6 +24,14 @@ struct SearchPage: View {
                         viewModel.fetchCoasterByTerm(searchTerm: searchText)
                     })
                     .padding(.vertical)
+                
+                Button("Clear Cache") {
+                                ImageCache.shared.clearCache()
+                            }
+                            .padding()
+                            .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
                 
                 if let coasterResults = viewModel.coasters{
                     ScrollView {
@@ -42,9 +48,6 @@ struct SearchPage: View {
                                     .padding(.horizontal)
                             }
                             .buttonStyle(PlainButtonStyle())
-                        }
-                        .sheet(isPresented: $presentSheet) {
-                            CoasterDetailView(coaster: $selectedCoaster)
                         }
                         Spacer()
                             .frame(height: 75)

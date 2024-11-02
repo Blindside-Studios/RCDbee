@@ -24,7 +24,7 @@ struct CoasterDetailView: View {
                     if horizontalSizeClass == .compact {
                         // iPhone layout
                         // image at the top
-                        BannerView(pictureURL: .constant(coaster.mainPicture?.url))
+                        BannerView(pictureURL: .constant(coaster.mainPicture?.url), pictureID: .constant("\(String(describing: coaster.mainPicture!.id))"))
                             .frame(height: 400)
                             .matchedGeometryEffect(id: "image-\(coaster.id)", in: animationNamespace)
                         // fact cards
@@ -35,7 +35,7 @@ struct CoasterDetailView: View {
                         ZStack{
                             // image at the top
                             VStack{
-                                BannerView(pictureURL: .constant(coaster.mainPicture?.url))
+                                BannerView(pictureURL: .constant(coaster.mainPicture?.url), pictureID: .constant("\(coaster.mainPicture!.id)"))
                                     .frame(height: 600)
                                     .matchedGeometryEffect(id: "image-\(coaster.id)", in: animationNamespace)
                                 Spacer()

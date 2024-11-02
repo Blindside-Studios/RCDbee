@@ -40,31 +40,11 @@ struct SearchResultRow: View {
             .padding(.leading, -80)
             .offset(x: 100)
             Spacer()
-            Group{
-                if ((coaster?.mainPicture?.url) != nil){
-                    let pictureURL = coaster?.mainPicture?.url
-                    GeometryReader { geometry in
-                        AsyncImage(url: URL(string: pictureURL!)) { image in
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: geometry.size.width)
-                                .clipped()
-                        } placeholder: {
-                            ProgressView()
-                        }
-                    }
-                }
-                else { Image(systemName: "xmark.bin")
-                        .resizable()
-                        .opacity(0.3)
-                        .aspectRatio(contentMode: .fill)
-                }
-            }
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-            .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
-            .matchedGeometryEffect(id: "image-\(coaster!.id)", in: animationNamespace)
+            
+            ImageViewer(pictureURL: .constant(coaster?.mainPicture?.url), pictureID: .constant("\(coaster?.mainPicture?.id ?? 0)"))
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
+                .mask(LinearGradient(gradient: Gradient(colors: [.black, .black, .clear]), startPoint: .trailing, endPoint: .leading))
         }
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 30))
