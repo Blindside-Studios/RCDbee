@@ -25,13 +25,15 @@ struct RCDBCoasterDetail: Codable, Identifiable {
     
     var statItems: [StatItem] {
         return [
+            // TODO: These units are all hardcoded, I am not sure if I am allowed to convert them anyways and the values are force-unwrapped, meaning I can't check if they exist or not.
             StatItem(statIcon: "star", statName: "Manufacturer", statValue: make),
             StatItem(statIcon: "star", statName: "Model", statValue: model),
             StatItem(statIcon: "star", statName: "Type", statValue: "\(type ?? "Unknown Type"), \(design ?? "Unknown Design")"),
-            StatItem(statIcon: "star", statName: "Speed", statValue: stats?.speed),
-            StatItem(statIcon: "star", statName: "Inversions", statValue: stats?.inversions),
-            StatItem(statIcon: "star", statName: "Length", statValue: stats?.length),
-            StatItem(statIcon: "star", statName: "Height", statValue: stats?.height),
+            StatItem(statIcon: "star", statName: "Speed", statValue: (stats?.speed) ?? "unknown" + " km/h"),
+            StatItem(statIcon: "star", statName: "Inversions", statValue: (stats?.inversions) ?? "unkown"),
+            StatItem(statIcon: "star", statName: "Length", statValue: (stats?.length) ?? "uknown" + " m"),
+            StatItem(statIcon: "star", statName: "Height", statValue: (stats?.height) ?? "unkown" + " m"),
+            StatItem(statIcon: "star", statName: "Capacity", statValue: (stats?.capacity) ?? "unknown" + " rph")
             // Add more items as needed
         ]
     }

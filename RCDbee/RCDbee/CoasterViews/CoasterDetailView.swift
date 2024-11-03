@@ -11,12 +11,13 @@ struct CoasterDetailView: View {
     @Binding var coaster: RCDBCoasterDetail!
     
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack{
             LinearGradient(gradient: Gradient(colors: [.cyan, .blue, .purple]), startPoint: .top, endPoint: .bottom)
-                .contrast(5)
-                .opacity(0.3)
+                .contrast(3)
+                .opacity(colorScheme == .dark ? 0.25 : 0.35)
             
             ScrollView{
                 Group {

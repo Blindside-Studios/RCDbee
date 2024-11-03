@@ -17,7 +17,7 @@ struct FactsView: View {
     }
     
     var body: some View {
-        ScrollView(.horizontal){
+        ScrollView(.horizontal, showsIndicators: false){
             if (horizontalSizeClass == .compact){
                 LazyHGrid(rows: adaptiveFactColumns, spacing: 10){
                     ForEach(coaster.statItems, id: \.statName) { item in
@@ -40,7 +40,6 @@ struct FactsView: View {
                 .padding()
             }
         }
-        
     }
 }
 
