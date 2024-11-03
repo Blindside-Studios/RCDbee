@@ -29,11 +29,11 @@ struct RCDBCoasterDetail: Codable, Identifiable {
             StatItem(statIcon: "star", statName: "Manufacturer", statValue: make),
             StatItem(statIcon: "star", statName: "Model", statValue: model),
             StatItem(statIcon: "star", statName: "Type", statValue: "\(type ?? "Unknown Type"), \(design ?? "Unknown Design")"),
-            StatItem(statIcon: "star", statName: "Speed", statValue: (stats?.speed) ?? "unknown" + " km/h"),
+            StatItem(statIcon: "star", statName: "Speed", statValue: ((stats?.speed) ?? "unknown") + " km/h"),
             StatItem(statIcon: "star", statName: "Inversions", statValue: (stats?.inversions) ?? "unkown"),
-            StatItem(statIcon: "star", statName: "Length", statValue: (stats?.length) ?? "uknown" + " m"),
-            StatItem(statIcon: "star", statName: "Height", statValue: (stats?.height) ?? "unkown" + " m"),
-            StatItem(statIcon: "star", statName: "Capacity", statValue: (stats?.capacity) ?? "unknown" + " rph")
+            StatItem(statIcon: "star", statName: "Length", statValue: ((stats?.length) ?? "uknown") + " m"),
+            StatItem(statIcon: "star", statName: "Height", statValue: ((stats?.height) ?? "unkown") + " m"),
+            StatItem(statIcon: "star", statName: "Capacity", statValue: ((stats?.capacity) ?? "unknown") + " rph")
             // Add more items as needed
         ]
     }
